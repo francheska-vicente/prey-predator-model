@@ -1,1 +1,1 @@
-# prey-predator-model
+# Predator-Prey Model
