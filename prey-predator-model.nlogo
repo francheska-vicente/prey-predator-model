@@ -227,9 +227,9 @@ HORIZONTAL
 
 SLIDER
 28
-289
+257
 201
-322
+290
 food-regrowth-time
 food-regrowth-time
 0
@@ -241,10 +241,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-28
-330
+30
+294
 204
-363
+327
 fixed-energy
 fixed-energy
 0
@@ -256,10 +256,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-29
-370
-205
-403
+30
+331
+206
+364
 fixed-percent-reproducing
 fixed-percent-reproducing
 0
@@ -269,6 +269,39 @@ fixed-percent-reproducing
 1
 NIL
 HORIZONTAL
+
+MONITOR
+33
+399
+185
+444
+Number of Cows
+count cows
+17
+1
+11
+
+MONITOR
+35
+450
+184
+495
+Number of Humans
+count humans
+17
+1
+11
+
+MONITOR
+36
+499
+185
+544
+Number of Food (Grass)
+count patches with [pcolor = green]
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?

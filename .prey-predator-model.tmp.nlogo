@@ -117,14 +117,14 @@ to check-die
 end
 
 to check-reproduce-cows
-  if random- 100 >= fixed-percent-reproducing
+  if random 100 >= fixed-percent-reproducing
   [
     hatch-cows 1 [ move ]
   ]
 end
 
 to check-reproduce-humans
-  if random-float 100 >= fixed-percent-reproducing
+  if random 100 >= fixed-percent-reproducing
   [
     hatch-humans 1 [ move ]
   ]
@@ -204,7 +204,7 @@ num-preys
 num-preys
 0
 100
-50.0
+100.0
 1
 1
 NIL
@@ -219,7 +219,7 @@ num-predators
 num-predators
 0
 100
-50.0
+100.0
 1
 1
 NIL
@@ -227,14 +227,14 @@ HORIZONTAL
 
 SLIDER
 28
-289
+257
 201
-322
+290
 food-regrowth-time
 food-regrowth-time
 0
 100
-50.0
+100.0
 1
 1
 NIL
@@ -242,14 +242,14 @@ HORIZONTAL
 
 SLIDER
 28
-330
+298
 204
-363
+331
 fixed-energy
 fixed-energy
 0
 100
-50.0
+17.0
 1
 1
 NIL
@@ -257,18 +257,51 @@ HORIZONTAL
 
 SLIDER
 29
-370
+338
 205
-403
+371
 fixed-percent-reproducing
 fixed-percent-reproducing
 0
 100
-58.0
+89.0
 1
 1
 NIL
 HORIZONTAL
+
+MONITOR
+40
+499
+148
+544
+Number of Cows
+count cows
+17
+1
+11
+
+MONITOR
+162
+499
+285
+544
+Number of Humans
+count humans
+17
+1
+11
+
+MONITOR
+305
+500
+454
+545
+Number of Food (Grass)
+count patches with [pcolor = green]
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
