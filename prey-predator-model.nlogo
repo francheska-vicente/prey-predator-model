@@ -135,10 +135,10 @@ to-report coin-flip?
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-249
-14
-686
-452
+256
+53
+693
+491
 -1
 -1
 13.0
@@ -162,10 +162,10 @@ ticks
 30.0
 
 BUTTON
-73
-48
-136
-81
+90
+55
+153
+88
 setup
 setup
 NIL
@@ -179,10 +179,10 @@ NIL
 1
 
 BUTTON
-74
-96
-137
-129
+90
+95
+153
+128
 go
 go
 T
@@ -196,25 +196,25 @@ NIL
 1
 
 SLIDER
-28
-163
-200
-196
-num-preys
-num-preys
-0
-100
-100.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-28
+34
+165
 206
-200
-239
+198
+num-preys
+num-preys
+0
+100
+100.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+34
+208
+206
+241
 num-predators
 num-predators
 0
@@ -226,9 +226,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-28
+32
 257
-201
+205
 290
 food-regrowth-time
 food-regrowth-time
@@ -241,9 +241,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-30
+32
 294
-204
+206
 327
 fixed-energy
 fixed-energy
@@ -257,9 +257,9 @@ HORIZONTAL
 
 SLIDER
 30
-331
+332
 206
-364
+365
 fixed-percent-reproducing
 fixed-percent-reproducing
 0
@@ -271,10 +271,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-33
-399
-185
-444
+733
+181
+885
+226
 Number of Cows
 count cows
 17
@@ -282,10 +282,10 @@ count cows
 11
 
 MONITOR
-35
-450
-184
-495
+733
+232
+882
+277
 Number of Humans
 count humans
 17
@@ -293,10 +293,10 @@ count humans
 11
 
 MONITOR
-36
-499
-185
-544
+734
+281
+883
+326
 Number of Food (Grass)
 count patches with [pcolor = green]
 17

@@ -135,10 +135,10 @@ to-report coin-flip?
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-249
-14
-686
-452
+288
+60
+725
+498
 -1
 -1
 13.0
@@ -241,10 +241,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-28
-298
+30
+294
 204
-331
+327
 fixed-energy
 fixed-energy
 0
@@ -256,10 +256,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-29
-338
-205
-371
+30
+331
+206
+364
 fixed-percent-reproducing
 fixed-percent-reproducing
 0
@@ -271,10 +271,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-40
-499
-148
-544
+33
+399
+185
+444
 Number of Cows
 count cows
 17
@@ -282,10 +282,10 @@ count cows
 11
 
 MONITOR
-162
-499
-285
-544
+35
+450
+184
+495
 Number of Humans
 count humans
 17
@@ -293,10 +293,10 @@ count humans
 11
 
 MONITOR
-305
-500
-454
-545
+36
+499
+185
+544
 Number of Food (Grass)
 count patches with [pcolor = green]
 17
