@@ -44,23 +44,19 @@ to go
   ask cows [
     move
 
-    set energy energy - 1
-
     eat-grass
 
     check-die
-    check-reproduce
+    check-reproduce-cows
   ]
 
   ask humans [
     move
 
-    set energy energy - 1
-
     eat-cows
 
     check-die
-    check-reproduce
+    check-reproduce-humans
   ]
 
   ask patches [
@@ -73,18 +69,46 @@ end
 to move
   ifelse coin-flip? [right random 180] [left random 180]
   forward 1
+
+  set energy energy - 1
 end
 
 to eat-grass
-
+  ifelse pcolor = green
+  [
+    set pcolor black
+    set energy energy + 5
+  ]
+  [
+    set energy energy - 1
+  ]
 end
 
 to eat-cows
+  let mortal-peril one-of cows in-radius 0.7
 
+  ifelse mortal-peril != nobody
+  [
+    ask mortal-peril [ die ]
+    set energy energy + 5
+  ]
+  [
+    set energy energy - 1
+  ]
 end
 
 to regrowth
-
+  if pcolor = black
+  [
+    ifelse regrowth-time <= 0
+    [
+      set pcolor green
+      set regrowth-time food-regrowth-time
+    ]
+    [
+      set regrowth-time regrowth-time - 1
+    ]
+  ]
 end
 
 
@@ -92,8 +116,18 @@ to check-die
   if energy < 0 [ die ]
 end
 
-to check-reproduce
+to check-reproduce-cows
+  if random- 100 >= fixed-percent-reproducing
+  [
+    hatch-cows 1 [ move ]
+  ]
+end
 
+to check-reproduce-humans
+  if random-float 100 >= fixed-percent-reproducing
+  [
+    hatch-humans 1 [ move ]
+  ]
 end
 
 to-report coin-flip?
@@ -151,7 +185,7 @@ BUTTON
 129
 go
 go
-NIL
+T
 1
 T
 OBSERVER
@@ -230,7 +264,7 @@ fixed-percent-reproducing
 fixed-percent-reproducing
 0
 100
-50.0
+58.0
 1
 1
 NIL
