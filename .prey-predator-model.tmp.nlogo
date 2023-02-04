@@ -39,9 +39,7 @@ end
 to go
   if not any? humans and not any? cows [ stop ]
 
-  if not any? humans and count cows > 100 [ user-message "The cows have won!" stop ]
-
-
+  if not any? cows a
 
   tick
 end
