@@ -39,9 +39,65 @@ end
 to go
   if not any? humans and not any? cows [ stop ]
 
-  if not any? cows a
+  if not any? humans and count cows > 100 [ user-message "The cows have won!" stop ]
+
+  ask cows [
+    move
+
+    set energy energy - 1
+
+    eat-grass
+
+    check-die
+    check-reproduce
+  ]
+
+  ask humans [
+    move
+
+    set energy energy - 1
+
+    eat-cows
+
+    check-die
+    check-reproduce
+  ]
+
+  ask patches [
+    regrowth
+  ]
 
   tick
+end
+
+to move
+  ifelse coin-flip? [right random 180] [left random 180]
+  forward 1
+end
+
+to eat-grass
+
+end
+
+to eat-cows
+
+end
+
+to regrowth
+
+end
+
+
+to check-die
+  if energy < 0 [ die ]
+end
+
+to check-reproduce
+
+end
+
+to-report coin-flip?
+  report random 2 = 0
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
