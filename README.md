@@ -6,7 +6,7 @@ In this model, there are two main agents: (1) the cow, and (2) the coyote. The c
 The grass are the patches of green that can be seen in the model. If they are eaten, then they turn into the color black, and they can only be regrown after some fixed time.
 
 ### Prey: Cow
-
+The cow wanders around the environment trying to find its food—the grass patches. As they move around, they lose energy, and they can only gain energy through eating. Once they run out of energy, then they will die. Additionally, there is a possible that they can reproduce, which will increase the population of the cows. However, it is important to take note that they will also lose energy when they reproduce.
 
 ### Predator: Coyote
 
