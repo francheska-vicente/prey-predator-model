@@ -117,7 +117,7 @@ to check-die
 end
 
 to check-reproduce-cows
-  if random 100 >= fixed-percent-reproducing
+  if random 100 >= fixed-cow-reproducing
   [
     set energy energy / 2
     hatch-cows 1 [ move ]
@@ -125,7 +125,7 @@ to check-reproduce-cows
 end
 
 to check-reproduce-coyotes
-  if random 100 >= fixed-percent-reproducing
+  if random 100 >= fixed-coyote-reproducing
   [
     set energy energy / 2
     hatch-coyotes 1 [ move ]
@@ -162,6 +162,21 @@ GRAPHICS-WINDOW
 1
 ticks
 30.0
+
+SLIDER
+0
+0
+0
+0
+NIL
+NIL
+0
+100
+50.0
+1
+1
+NIL
+HORIZONTAL
 
 BUTTON
 90
@@ -236,7 +251,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-67.0
+51.0
 1
 1
 NIL
@@ -251,7 +266,7 @@ fixed-energy
 fixed-energy
 0
 1000
-434.0
+264.0
 1
 1
 NIL
@@ -266,7 +281,7 @@ fixed-coyote-reproducing
 fixed-coyote-reproducing
 0
 100
-90.0
+74.0
 1
 1
 NIL
@@ -304,6 +319,21 @@ count patches with [pcolor = green]
 17
 1
 11
+
+SLIDER
+29
+370
+211
+403
+fixed-cow-reproducing
+fixed-cow-reproducing
+0
+100
+47.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

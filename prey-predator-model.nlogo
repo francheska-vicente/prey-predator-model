@@ -83,7 +83,7 @@ to eat-grass
   if pcolor = green
   [
     set pcolor black
-    set energy energy + 5
+    set energy energy + add-energy
   ]
 end
 
@@ -93,7 +93,7 @@ to eat-cows
   if mortal-peril != nobody
   [
     ask mortal-peril [ die ]
-    set energy energy + 5
+    set energy energy + add-energy
   ]
 end
 
@@ -236,7 +236,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-67.0
+51.0
 1
 1
 NIL
@@ -251,7 +251,7 @@ fixed-energy
 fixed-energy
 0
 1000
-434.0
+264.0
 1
 1
 NIL
@@ -266,7 +266,7 @@ fixed-coyote-reproducing
 fixed-coyote-reproducing
 0
 100
-90.0
+74.0
 1
 1
 NIL
@@ -314,7 +314,22 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-50.0
+47.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+30
+406
+210
+439
+add-energy
+add-energy
+0
+20
+20.0
 1
 1
 NIL
