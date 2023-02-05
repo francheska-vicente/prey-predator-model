@@ -1,4 +1,4 @@
-breed [ humans human ] ; predator
+breed [ coyotes coyote ] ; predator
 
 breed [ cows cow ] ; prey
 
@@ -24,9 +24,9 @@ to setup
     set energy fixed-energy
   ]
 
-  create-humans num-predators [
-    set shape "person"
-    set color black
+  create-coyotes num-predators [
+    set shape "coyote"
+    set color
 
     setxy random-xcor random-ycor
 
@@ -37,9 +37,9 @@ end
 
 
 to go
-  if not any? humans and not any? cows [ stop ]
+  if not any? coyotes and not any? cows [ stop ]
 
-  if not any? humans and count cows > 100 [ user-message "The cows have won!" stop ]
+  if not any? coyotes and count cows > 100 [ user-message "The cows have won!" stop ]
 
   ask cows [
     move
@@ -50,13 +50,13 @@ to go
     check-reproduce-cows
   ]
 
-  ask humans [
+  ask coyotes [
     move
 
     eat-cows
 
     check-die
-    check-reproduce-humans
+    check-reproduce-coyotes
   ]
 
   ask patches [
@@ -123,10 +123,10 @@ to check-reproduce-cows
   ]
 end
 
-to check-reproduce-humans
+to check-reproduce-coyotes
   if random 100 >= fixed-percent-reproducing
   [
-    hatch-humans 1 [ move ]
+    hatch-coyotes 1 [ move ]
   ]
 end
 
@@ -135,10 +135,10 @@ to-report coin-flip?
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-288
-60
-725
-498
+256
+53
+693
+491
 -1
 -1
 13.0
@@ -162,10 +162,10 @@ ticks
 30.0
 
 BUTTON
-73
-48
-136
-81
+90
+55
+153
+88
 setup
 setup
 NIL
@@ -179,10 +179,10 @@ NIL
 1
 
 BUTTON
-74
-96
-137
-129
+90
+95
+153
+128
 go
 go
 T
@@ -196,25 +196,25 @@ NIL
 1
 
 SLIDER
-28
-163
-200
-196
-num-preys
-num-preys
-0
-100
-100.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-28
+34
+165
 206
-200
-239
+198
+num-preys
+num-preys
+0
+100
+100.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+34
+208
+206
+241
 num-predators
 num-predators
 0
@@ -226,9 +226,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-28
+32
 257
-201
+205
 290
 food-regrowth-time
 food-regrowth-time
@@ -241,9 +241,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-30
+32
 294
-204
+206
 327
 fixed-energy
 fixed-energy
@@ -257,9 +257,9 @@ HORIZONTAL
 
 SLIDER
 30
-331
+332
 206
-364
+365
 fixed-percent-reproducing
 fixed-percent-reproducing
 0
@@ -271,10 +271,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-33
-399
-185
-444
+733
+181
+885
+226
 Number of Cows
 count cows
 17
@@ -282,10 +282,10 @@ count cows
 11
 
 MONITOR
-35
-450
-184
-495
+733
+232
+882
+277
 Number of Humans
 count humans
 17
@@ -293,10 +293,10 @@ count humans
 11
 
 MONITOR
-36
-499
-185
-544
+734
+281
+883
+326
 Number of Food (Grass)
 count patches with [pcolor = green]
 17
@@ -413,6 +413,13 @@ false
 Polygon -7500403 true true 200 193 197 249 179 249 177 196 166 187 140 189 93 191 78 179 72 211 49 209 48 181 37 149 25 120 25 89 45 72 103 84 179 75 198 76 252 64 272 81 293 103 285 121 255 121 242 118 224 167
 Polygon -7500403 true true 73 210 86 251 62 249 48 208
 Polygon -7500403 true true 25 114 16 195 9 204 23 213 25 200 39 123
+
+coyote
+false
+3
+Polygon -16777216 true false 253 133 245 131 245 133
+Polygon -6459832 true true 3 188 6 233 46 159 39 187 39 199 21 220 21 242 28 254 40 254 42 247 32 236 32 224 61 200 69 192 76 203 67 222 66 237 77 248 89 256 101 256 99 246 78 233 80 225 101 201 90 178 123 184 150 186 162 182 167 194 173 207 174 221 169 231 159 236 161 246 172 245 181 232 185 223 196 239 201 254 217 255 215 244 205 236 193 209 189 183 209 172 229 153 243 138 260 139 285 145 278 135 294 134 300 128 301 129 270 114 266 100
+Polygon -6459832 true true 3 189 12 175 25 164 40 153 53 140 82 131 134 133 159 126 188 115 227 108 236 102 242 91 255 75 256 103 270 75 269 103 277 123
 
 cylinder
 false
@@ -631,13 +638,6 @@ Line -7500403 true 216 40 79 269
 Line -7500403 true 40 84 269 221
 Line -7500403 true 40 216 269 79
 Line -7500403 true 84 40 221 269
-
-wolf
-false
-0
-Polygon -16777216 true false 253 133 245 131 245 133
-Polygon -7500403 true true 2 194 13 197 30 191 38 193 38 205 20 226 20 257 27 265 38 266 40 260 31 253 31 230 60 206 68 198 75 209 66 228 65 243 82 261 84 268 100 267 103 261 77 239 79 231 100 207 98 196 119 201 143 202 160 195 166 210 172 213 173 238 167 251 160 248 154 265 169 264 178 247 186 240 198 260 200 271 217 271 219 262 207 258 195 230 192 198 210 184 227 164 242 144 259 145 284 151 277 141 293 140 299 134 297 127 273 119 270 105
-Polygon -7500403 true true -1 195 14 180 36 166 40 153 53 140 82 131 134 133 159 126 188 115 227 108 236 102 238 98 268 86 269 92 281 87 269 103 269 113
 
 x
 false
