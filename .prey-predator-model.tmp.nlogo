@@ -80,24 +80,20 @@ to move
 end
 
 to eat-grass
-  ifelse pcolor = green
+  if pcolor = green
   [
     set pcolor black
     set energy energy + 5
   ]
-
 end
 
 to eat-cows
-  let mortal-peril one-of cows in-radius 0.7
+  let mortal-peril one-of cows in-radius 0.2
 
-  ifelse mortal-peril != nobody
+  if mortal-peril != nobody
   [
     ask mortal-peril [ die ]
     set energy energy + 5
-  ]
-  [
-    set energy energy - 1
   ]
 end
 
@@ -123,6 +119,7 @@ end
 to check-reproduce-cows
   if random 100 >= fixed-percent-reproducing
   [
+    set energy energy / 2
     hatch-cows 1 [ move ]
   ]
 end
@@ -130,6 +127,7 @@ end
 to check-reproduce-coyotes
   if random 100 >= fixed-percent-reproducing
   [
+    set energy energy / 2
     hatch-coyotes 1 [ move ]
   ]
 end
@@ -141,11 +139,11 @@ end
 GRAPHICS-WINDOW
 256
 53
-693
-491
+759
+557
 -1
 -1
-13.0
+15.0
 1
 10
 1
@@ -238,7 +236,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-100.0
+35.0
 1
 1
 NIL
@@ -252,8 +250,8 @@ SLIDER
 fixed-energy
 fixed-energy
 0
-100
-17.0
+1000
+434.0
 1
 1
 NIL
@@ -268,17 +266,17 @@ fixed-percent-reproducing
 fixed-percent-reproducing
 0
 100
-89.0
+90.0
 1
 1
 NIL
 HORIZONTAL
 
 MONITOR
-733
-181
-885
-226
+810
+175
+962
+220
 Number of Cows
 count cows
 17
@@ -286,10 +284,10 @@ count cows
 11
 
 MONITOR
-733
-232
-882
-277
+810
+226
+959
+271
 Number of Coyotes
 count coyotes
 17
@@ -297,10 +295,10 @@ count coyotes
 11
 
 MONITOR
-734
-281
-883
-326
+811
+275
+960
+320
 Number of Food (Grass)
 count patches with [pcolor = green]
 17
