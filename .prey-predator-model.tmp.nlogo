@@ -83,7 +83,7 @@ to eat-grass
   if pcolor = green
   [
     set pcolor black
-    set energy energy + 5
+    set energy energy + add-energy
   ]
 end
 
@@ -93,7 +93,7 @@ to eat-cows
   if mortal-peril != nobody
   [
     ask mortal-peril [ die ]
-    set energy energy + 5
+    set energy energy + add-energy
   ]
 end
 
@@ -162,21 +162,6 @@ GRAPHICS-WINDOW
 1
 ticks
 30.0
-
-SLIDER
-0
-0
-0
-0
-NIL
-NIL
-0
-100
-50.0
-1
-1
-NIL
-HORIZONTAL
 
 BUTTON
 90
@@ -330,6 +315,21 @@ fixed-cow-reproducing
 0
 100
 47.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+30
+406
+210
+439
+add-energy-prey
+add-energy-prey
+0
+20
+20.0
 1
 1
 NIL

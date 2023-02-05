@@ -83,7 +83,7 @@ to eat-grass
   if pcolor = green
   [
     set pcolor black
-    set energy energy + add-energy
+    set energy energy + add-energy-prey
   ]
 end
 
@@ -93,7 +93,7 @@ to eat-cows
   if mortal-peril != nobody
   [
     ask mortal-peril [ die ]
-    set energy energy + add-energy
+    set energy energy + add-energy-predator
   ]
 end
 
@@ -325,8 +325,23 @@ SLIDER
 406
 210
 439
-add-energy
-add-energy
+add-energy-prey
+add-energy-prey
+0
+20
+20.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+29
+443
+209
+476
+add-energy-predator
+add-energy-predator
 0
 20
 20.0
