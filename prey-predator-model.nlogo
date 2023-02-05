@@ -2,17 +2,18 @@ breed [ coyotes coyote ] ; predator
 
 breed [ cows cow ] ; prey
 
-patches-own [ regrowth-time ]
+patches-own [ regrowth-time ] ; the time it takes for a plant patch to grow back
 
 turtles-own [
-  energy
-  happy?
-  similar-nearby
+  energy           ; the energy left of an agent
+  happy?           ; for set-up; checks if the agent is happy (i.e., with its herd/group)
+  similar-nearby   ; for set-up; checks the number of same type agent around it
 ]
 
+; the globals are used for the monitors
 globals [
-  cows-eaten
-  cows-no-energy
+  cows-eaten      ; counts the number of cows that died due to being eaten by the coyotes
+  cows-no-energy  ; counts the number of cows that died due to the loss of energy
 ]
 
 to setup
@@ -47,6 +48,8 @@ to setup
   set cows-eaten 0
   set cows-no-energy 0
 
+  ; the lines of code under this are used to group the agents together.
+  ; coyotes hunt in groups of at least two, while cows are herded together in groups of at least five
   update-cows
   update-coyotes
 
@@ -55,7 +58,7 @@ to setup
 
 end
 
-to make-herd
+to make-herd ; this function loops until all cows are happy
   loop [
     if all? cows [ happy? ] [ stop ]
     move-unhappy-cows
@@ -63,7 +66,7 @@ to make-herd
   ]
 end
 
-to make-group
+to make-group ; this function loops until all coyotes are happy
   loop [
     if all? coyotes [ happy? ] [ stop ]
     move-unhappy-coyotes
@@ -71,31 +74,35 @@ to make-group
   ]
 end
 
-to move-unhappy-cows
+to move-unhappy-cows ; this function moves the unhappy cows
   ask cows with [ not happy? ]
   [ find-new-spot ]
 end
 
-to find-new-spot
+to find-new-spot ; this function is used by both cows and coyotes. it moves the agents into a new vacant spot
   right random-float 360
   forward random-float 10
   if any? other turtles-here [ find-new-spot ]
   move-to patch-here
 end
 
-to update-cows
+to update-cows ; this function updates the information of the cows
+  ; a happy cow is defined by the number of cow in its moore neighbors.
+  ; there should be at least 2 cows around it
   ask cows [
     set similar-nearby count (cows-on neighbors)
     set happy? similar-nearby >= 2
   ]
 end
 
-to move-unhappy-coyotes
+to move-unhappy-coyotes ; this function moves the unhappy coyotes
   ask coyotes with [ not happy? ]
   [ find-new-spot ]
 end
 
-to update-coyotes
+to update-coyotes ; this function updates the information of the coyotes
+  ; a happy coyote is defined by the number of coyote in its moore neighbors.
+  ; there should be 2 - 4 coyotes around it
   ask coyotes [
     set similar-nearby count (coyotes-on neighbors)
     set happy? similar-nearby >= 2 and similar-nearby <= 4
@@ -103,8 +110,10 @@ to update-coyotes
 end
 
 to go
+  ; if there are no more coyotes and cows, then we should stop the model.
   if not any? coyotes and not any? cows [ stop ]
 
+  ; if there are no more coyotes and at least a certain number of cows, then we should stop the model.
   if not any? coyotes and count cows > 100 [ user-message "The cows have won!" stop ]
 
   ask cows [
@@ -136,7 +145,7 @@ to go
   tick
 end
 
-to move
+to move ; this function moves agents one step forward in a random direction. it also subtracts the energy for the movement.
   ifelse coin-flip? [right random 180] [left random 180]
   forward 1
 
@@ -308,7 +317,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-100.0
+30.0
 1
 1
 NIL
@@ -323,7 +332,7 @@ fixed-energy
 fixed-energy
 0
 1000
-25.0
+75.0
 1
 1
 NIL
@@ -386,7 +395,7 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-51.0
+67.0
 1
 1
 NIL
@@ -401,7 +410,7 @@ add-energy-prey
 add-energy-prey
 0
 20
-1.0
+6.0
 1
 1
 NIL
