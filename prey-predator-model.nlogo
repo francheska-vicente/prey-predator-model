@@ -18,7 +18,7 @@ to setup
 
   create-cows num-preys [
     set shape "cow"
-    set size 1.5
+    ; set size 1.5
     set color white
     setxy random-xcor random-ycor
 
@@ -27,7 +27,7 @@ to setup
 
   create-coyotes num-predators [
     set shape "coyote"
-    set size 1.5
+    ; set size 1.5
     set color brown
 
     setxy random-xcor random-ycor
@@ -88,7 +88,7 @@ to eat-grass
 end
 
 to eat-cows
-  let mortal-peril one-of cows in-radius 0.7
+  let mortal-peril one-of cows in-radius 0.2
 
   if mortal-peril != nobody
   [
@@ -119,6 +119,7 @@ end
 to check-reproduce-cows
   if random 100 >= fixed-percent-reproducing
   [
+    set energy energy / 2
     hatch-cows 1 [ move ]
   ]
 end
@@ -126,6 +127,7 @@ end
 to check-reproduce-coyotes
   if random 100 >= fixed-percent-reproducing
   [
+    set energy energy / 2
     hatch-coyotes 1 [ move ]
   ]
 end
@@ -137,11 +139,11 @@ end
 GRAPHICS-WINDOW
 256
 53
-693
-491
+924
+722
 -1
 -1
-13.0
+20.0
 1
 10
 1
@@ -234,7 +236,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-100.0
+67.0
 1
 1
 NIL
@@ -248,8 +250,8 @@ SLIDER
 fixed-energy
 fixed-energy
 0
-100
-17.0
+1000
+434.0
 1
 1
 NIL
@@ -264,16 +266,16 @@ fixed-percent-reproducing
 fixed-percent-reproducing
 0
 100
-89.0
+90.0
 1
 1
 NIL
 HORIZONTAL
 
 MONITOR
-733
+956
 181
-885
+1108
 226
 Number of Cows
 count cows
@@ -282,9 +284,9 @@ count cows
 11
 
 MONITOR
-733
+956
 232
-882
+1105
 277
 Number of Coyotes
 count coyotes
@@ -293,9 +295,9 @@ count coyotes
 11
 
 MONITOR
-734
+957
 281
-883
+1106
 326
 Number of Food (Grass)
 count patches with [pcolor = green]
