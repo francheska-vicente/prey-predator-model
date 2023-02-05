@@ -18,6 +18,7 @@ to setup
 
   create-cows num-preys [
     set shape "cow"
+    set size 1.5
     set color white
     setxy random-xcor random-ycor
 
@@ -26,7 +27,8 @@ to setup
 
   create-coyotes num-predators [
     set shape "coyote"
-    set color
+    set size 1.5
+    set color brown
 
     setxy random-xcor random-ycor
 
@@ -48,6 +50,8 @@ to go
 
     check-die
     check-reproduce-cows
+
+    set label energy
   ]
 
   ask coyotes [
@@ -57,6 +61,8 @@ to go
 
     check-die
     check-reproduce-coyotes
+
+    set label energy
   ]
 
   ask patches [
@@ -79,9 +85,7 @@ to eat-grass
     set pcolor black
     set energy energy + 5
   ]
-  [
-    set energy energy - 1
-  ]
+
 end
 
 to eat-cows
@@ -286,8 +290,8 @@ MONITOR
 232
 882
 277
-Number of Humans
-count humans
+Number of Coyotes
+count coyotes
 17
 1
 11

@@ -18,6 +18,7 @@ to setup
 
   create-cows num-preys [
     set shape "cow"
+    set size 1.5
     set color white
     setxy random-xcor random-ycor
 
@@ -26,6 +27,7 @@ to setup
 
   create-coyotes num-predators [
     set shape "coyote"
+    set size 1.5
     set color brown
 
     setxy random-xcor random-ycor
@@ -48,6 +50,8 @@ to go
 
     check-die
     check-reproduce-cows
+
+    set label energy
   ]
 
   ask coyotes [
@@ -57,6 +61,8 @@ to go
 
     check-die
     check-reproduce-coyotes
+
+    set label energy
   ]
 
   ask patches [
@@ -74,26 +80,20 @@ to move
 end
 
 to eat-grass
-  ifelse pcolor = green
+  if pcolor = green
   [
     set pcolor black
     set energy energy + 5
-  ]
-  [
-    set energy energy - 1
   ]
 end
 
 to eat-cows
   let mortal-peril one-of cows in-radius 0.7
 
-  ifelse mortal-peril != nobody
+  if mortal-peril != nobody
   [
     ask mortal-peril [ die ]
     set energy energy + 5
-  ]
-  [
-    set energy energy - 1
   ]
 end
 
