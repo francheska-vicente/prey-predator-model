@@ -4,7 +4,11 @@ breed [ cows cow ] ; prey
 
 patches-own [ regrowth-time ]
 
-turtles-own [ energy ]
+turtles-own [
+  energy
+  happy?
+  similar-nearby
+]
 
 globals [
   cows-eaten
@@ -43,8 +47,60 @@ to setup
   set cows-eaten 0
   set cows-no-energy 0
 
+  update-cows
+  update-coyotes
+
+  make-herd
+  make-group
+
 end
 
+to make-herd
+  loop [
+    if all? cows [ happy? ] [ stop ]
+    move-unhappy-cows
+    update-cows
+  ]
+end
+
+to make-group
+  loop [
+    if all? coyotes [ happy? ] [ stop ]
+    move-unhappy-coyotes
+    update-coyotes
+  ]
+end
+
+to move-unhappy-cows
+  ask cows with [ not happy? ]
+  [ find-new-spot ]
+end
+
+to find-new-spot
+  right random-float 360
+  forward random-float 10
+  if any? other turtles-here [ find-new-spot ]
+  move-to patch-here
+end
+
+to update-cows
+  ask cows [
+    set similar-nearby count (cows-on neighbors)
+    set happy? similar-nearby >= 2
+  ]
+end
+
+to move-unhappy-coyotes
+  ask coyotes with [ not happy? ]
+  [ find-new-spot ]
+end
+
+to update-coyotes
+  ask coyotes [
+    set similar-nearby count (coyotes-on neighbors)
+    set happy? similar-nearby >= 2 and similar-nearby <= 4
+  ]
+end
 
 to go
   if not any? coyotes and not any? cows [ stop ]
