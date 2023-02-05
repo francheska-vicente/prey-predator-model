@@ -1,6 +1,14 @@
 # The Cow-Coyote Relationship: A Prey-Predator Ecosystem
 
 ## Behavior of the Agents
+In this model, there are two main agents: (1) the cow, and (2) the coyote. The coyotes are the a predator that tries to eat the cows, while cows are the preys that eats grass. 
+
+The grass are the patches of green that can be seen in the model. If they are eaten, then they turn into the color black, and they can only be regrown after some fixed time.
+
+### Prey: Cow
+
+
+### Predator: Coyote
 
 
 ## Adjustable Parameters
