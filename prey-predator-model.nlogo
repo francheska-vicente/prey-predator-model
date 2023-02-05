@@ -23,7 +23,7 @@ to setup
 
   create-cows num-preys [
     set shape "cow"
-    ; set size 1.5
+    set size 1.5
     set color white
     setxy random-xcor random-ycor
 
@@ -32,7 +32,7 @@ to setup
 
   create-coyotes num-predators [
     set shape "coyote"
-    ; set size 1.5
+    set size 1.5
     set color brown
 
     setxy random-xcor random-ycor
@@ -127,8 +127,8 @@ end
 
 to check-die-cows
   if energy < 0 [
-    die
     set cows-no-energy cows-no-energy + 1
+    die
   ]
 end
 
@@ -155,11 +155,11 @@ end
 GRAPHICS-WINDOW
 256
 53
-924
-722
+693
+491
 -1
 -1
-20.0
+13.0
 1
 10
 1
@@ -282,7 +282,7 @@ fixed-coyote-reproducing
 fixed-coyote-reproducing
 0
 100
-74.0
+77.0
 1
 1
 NIL
