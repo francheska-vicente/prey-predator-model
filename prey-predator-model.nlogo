@@ -117,7 +117,7 @@ to check-die
 end
 
 to check-reproduce-cows
-  if random 100 >= fixed-percent-reproducing
+  if random 100 >= fixed-cow-reproducing
   [
     set energy energy / 2
     hatch-cows 1 [ move ]
@@ -125,7 +125,7 @@ to check-reproduce-cows
 end
 
 to check-reproduce-coyotes
-  if random 100 >= fixed-percent-reproducing
+  if random 100 >= fixed-coyote-reproducing
   [
     set energy energy / 2
     hatch-coyotes 1 [ move ]
@@ -260,10 +260,10 @@ HORIZONTAL
 SLIDER
 30
 332
-206
+210
 365
-fixed-percent-reproducing
-fixed-percent-reproducing
+fixed-coyote-reproducing
+fixed-coyote-reproducing
 0
 100
 90.0
@@ -304,6 +304,21 @@ count patches with [pcolor = green]
 17
 1
 11
+
+SLIDER
+29
+370
+211
+403
+fixed-cow-reproducing
+fixed-cow-reproducing
+0
+100
+50.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

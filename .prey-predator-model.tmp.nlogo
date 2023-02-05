@@ -18,7 +18,7 @@ to setup
 
   create-cows num-preys [
     set shape "cow"
-    set size 1.5
+    ; set size 1.5
     set color white
     setxy random-xcor random-ycor
 
@@ -27,7 +27,7 @@ to setup
 
   create-coyotes num-predators [
     set shape "coyote"
-    set size 1.5
+    ; set size 1.5
     set color brown
 
     setxy random-xcor random-ycor
@@ -139,11 +139,11 @@ end
 GRAPHICS-WINDOW
 256
 53
-759
-557
+924
+722
 -1
 -1
-15.0
+20.0
 1
 10
 1
@@ -236,7 +236,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-35.0
+67.0
 1
 1
 NIL
@@ -260,10 +260,10 @@ HORIZONTAL
 SLIDER
 30
 332
-206
+210
 365
-fixed-percent-reproducing
-fixed-percent-reproducing
+fixed-coyote-reproducing
+fixed-coyote-reproducing
 0
 100
 90.0
@@ -273,10 +273,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-810
-175
-962
-220
+956
+181
+1108
+226
 Number of Cows
 count cows
 17
@@ -284,10 +284,10 @@ count cows
 11
 
 MONITOR
-810
-226
-959
-271
+956
+232
+1105
+277
 Number of Coyotes
 count coyotes
 17
@@ -295,10 +295,10 @@ count coyotes
 11
 
 MONITOR
-811
-275
-960
-320
+957
+281
+1106
+326
 Number of Food (Grass)
 count patches with [pcolor = green]
 17
