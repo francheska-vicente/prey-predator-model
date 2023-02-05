@@ -152,7 +152,8 @@ to move ; this function moves agents one step forward in a random direction. it 
   set energy energy - 1
 end
 
-to eat-grass
+to eat-grass ; this function determines if there is grass in the patch where the cow is on.
+             ; it also "eats" the grass and adds energy to the cow.
   if pcolor = green
   [
     set pcolor black
@@ -160,7 +161,9 @@ to eat-grass
   ]
 end
 
-to eat-cows
+to eat-cows ; this function determines if there is a cow near the coyote.
+            ; it also lets a random cow near the coyote die and adds energy to the coyote.
+            ; it also updates the global counter of the cows that die due to being eaten by a coyote.
   let mortal-peril one-of cows in-radius 0.2
 
   if mortal-peril != nobody
@@ -171,7 +174,7 @@ to eat-cows
   ]
 end
 
-to regrowth
+to regrowth ; this function determines if it is already time for a grass patch that was eaten to be regrown.
   if pcolor = black
   [
     ifelse regrowth-time <= 0
@@ -186,18 +189,20 @@ to regrowth
 end
 
 
-to check-die-coyotes
+to check-die-coyotes ; this function determines if the coyote will die at that time step due to no energy.
   if energy < 0 [ die ]
 end
 
-to check-die-cows
+to check-die-cows ; this function determines if the cow will die at that time step due to no energy.
+                  ; it also updates the global counter for the cows that die due to no energy.
   if energy < 0 [
     set cows-no-energy cows-no-energy + 1
     die
   ]
 end
 
-to check-reproduce-cows
+to check-reproduce-cows ; this function determines if the cow will reproduce.
+                        ; if the cow will reproduce, its energy will be divided into half.
   if random 100 < fixed-cow-reproducing
   [
     set energy energy / 2
@@ -205,7 +210,8 @@ to check-reproduce-cows
   ]
 end
 
-to check-reproduce-coyotes
+to check-reproduce-coyotes ; this function determines if the coyote will reproduce.
+                          ; if the coyote will reproduce, its energy will be divided into half.
   if random 100 < fixed-coyote-reproducing
   [
     set energy energy / 2
@@ -213,7 +219,7 @@ to check-reproduce-coyotes
   ]
 end
 
-to-report coin-flip?
+to-report coin-flip? ; this function returns true or false randomly
   report random 2 = 0
 end
 @#$#@#$#@
@@ -309,10 +315,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-32
-257
-205
-290
+33
+258
+206
+291
 food-regrowth-time
 food-regrowth-time
 0
@@ -324,10 +330,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-32
-294
-206
-327
+33
+295
+207
+328
 fixed-energy
 fixed-energy
 0
@@ -339,10 +345,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-30
-332
-210
-365
+32
+345
+212
+378
 fixed-coyote-reproducing
 fixed-coyote-reproducing
 0
@@ -354,10 +360,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-956
-181
-1108
-226
+721
+101
+889
+146
 Number of Cows
 count cows
 17
@@ -365,10 +371,10 @@ count cows
 11
 
 MONITOR
-956
-232
-1105
-277
+721
+152
+890
+197
 Number of Coyotes
 count coyotes
 17
@@ -376,10 +382,10 @@ count coyotes
 11
 
 MONITOR
-957
-281
-1106
-326
+722
+201
+890
+246
 Number of Food (Grass)
 count patches with [pcolor = green]
 17
@@ -387,10 +393,10 @@ count patches with [pcolor = green]
 11
 
 SLIDER
-29
-370
-211
-403
+31
+383
+213
+416
 fixed-cow-reproducing
 fixed-cow-reproducing
 0
@@ -402,10 +408,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-30
-406
-210
-439
+31
+437
+211
+470
 add-energy-prey
 add-energy-prey
 0
@@ -417,10 +423,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-29
-443
-209
-476
+30
+474
+210
+507
 add-energy-predator
 add-energy-predator
 0
@@ -432,10 +438,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-40
-515
-216
-560
+722
+321
+887
+366
 Cows eaten by Coyote
 cows-eaten
 17
@@ -443,10 +449,10 @@ cows-eaten
 11
 
 MONITOR
-37
-570
-215
-615
+722
+372
+889
+417
 Cows dead due to no Energy
 cows-no-energy
 17
