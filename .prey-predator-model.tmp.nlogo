@@ -127,8 +127,8 @@ end
 
 to check-die-cows
   if energy < 0 [
+    set cows-no-energy cows-no-energy + 1
     die
-
   ]
 end
 
@@ -141,7 +141,7 @@ to check-reproduce-cows
 end
 
 to check-reproduce-coyotes
-  if random 100 >= fixed-coyote-reproducing
+  if random 100  fixed-coyote-reproducing
   [
     set energy energy / 2
     hatch-coyotes 1 [ move ]
@@ -330,7 +330,7 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-49.0
+51.0
 1
 1
 NIL
