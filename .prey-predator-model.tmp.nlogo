@@ -6,6 +6,11 @@ patches-own [ regrowth-time ]
 
 turtles-own [ energy ]
 
+globals [
+  cows-eaten
+  cows-no-energy
+]
+
 to setup
   clear-all
 
@@ -35,6 +40,9 @@ to setup
     set energy fixed-energy
   ]
 
+  set cows-eaten 0
+  set cows-no-energy 0
+
 end
 
 
@@ -48,7 +56,7 @@ to go
 
     eat-grass
 
-    check-die
+    check-die-cows
     check-reproduce-cows
 
     set label energy
@@ -59,7 +67,7 @@ to go
 
     eat-cows
 
-    check-die
+    check-die-coyotes
     check-reproduce-coyotes
 
     set label energy
@@ -83,7 +91,7 @@ to eat-grass
   if pcolor = green
   [
     set pcolor black
-    set energy energy + add-energy
+    set energy energy + add-energy-prey
   ]
 end
 
@@ -93,7 +101,8 @@ to eat-cows
   if mortal-peril != nobody
   [
     ask mortal-peril [ die ]
-    set energy energy + add-energy
+    set energy energy + add-energy-predator
+    set cows-eaten cows-eaten + 1
   ]
 end
 
@@ -112,7 +121,11 @@ to regrowth
 end
 
 
-to check-die
+to check-die-coyotes
+  if energy < 0 [ die ]
+end
+
+to check-die-cows
   if energy < 0 [ die ]
 end
 
@@ -334,6 +347,43 @@ add-energy-prey
 1
 NIL
 HORIZONTAL
+
+SLIDER
+29
+443
+209
+476
+add-energy-predator
+add-energy-predator
+0
+20
+20.0
+1
+1
+NIL
+HORIZONTAL
+
+MONITOR
+40
+515
+216
+560
+Cows eaten by Coyote
+cows-eaten
+17
+1
+11
+
+MONITOR
+37
+570
+215
+615
+Cows dead due to no Energy
+cows-no-energy
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?

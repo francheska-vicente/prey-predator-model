@@ -6,6 +6,11 @@ patches-own [ regrowth-time ]
 
 turtles-own [ energy ]
 
+globals [
+  cows-eaten
+  cows-no-energy
+]
+
 to setup
   clear-all
 
@@ -35,6 +40,9 @@ to setup
     set energy fixed-energy
   ]
 
+  set cows-eaten 0
+  set cows-no-energy 0
+
 end
 
 
@@ -48,7 +56,7 @@ to go
 
     eat-grass
 
-    check-die
+    check-die-cows
     check-reproduce-cows
 
     set label energy
@@ -59,7 +67,7 @@ to go
 
     eat-cows
 
-    check-die
+    check-die-coyotes
     check-reproduce-coyotes
 
     set label energy
@@ -94,6 +102,7 @@ to eat-cows
   [
     ask mortal-peril [ die ]
     set energy energy + add-energy-predator
+    set cows-eaten cows-eaten + 1
   ]
 end
 
@@ -112,8 +121,15 @@ to regrowth
 end
 
 
-to check-die
+to check-die-coyotes
   if energy < 0 [ die ]
+end
+
+to check-die-cows
+  if energy < 0 [
+    die
+    set cows-no-energy cows-no-energy + 1
+  ]
 end
 
 to check-reproduce-cows
@@ -236,7 +252,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-51.0
+100.0
 1
 1
 NIL
@@ -251,7 +267,7 @@ fixed-energy
 fixed-energy
 0
 1000
-264.0
+25.0
 1
 1
 NIL
@@ -314,7 +330,7 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-47.0
+49.0
 1
 1
 NIL
@@ -329,7 +345,7 @@ add-energy-prey
 add-energy-prey
 0
 20
-20.0
+1.0
 1
 1
 NIL
@@ -349,6 +365,28 @@ add-energy-predator
 1
 NIL
 HORIZONTAL
+
+MONITOR
+40
+515
+216
+560
+Cows eaten by Coyote
+cows-eaten
+17
+1
+11
+
+MONITOR
+37
+570
+215
+615
+Cows dead due to no Energy
+cows-no-energy
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
