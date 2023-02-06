@@ -136,7 +136,7 @@ to go
     check-die-coyotes
     check-reproduce-coyotes
 
-    set label precision energy 3
+    set label penergy
   ]
 
   ask patches [
@@ -371,7 +371,7 @@ fixed-energy
 fixed-energy
 0
 1000
-120.0
+200.0
 1
 1
 NIL
@@ -386,7 +386,7 @@ fixed-coyote-reproducing
 fixed-coyote-reproducing
 0
 100
-2.0
+3.0
 1
 1
 NIL
@@ -434,7 +434,7 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-10.0
+12.0
 1
 1
 NIL
@@ -449,7 +449,7 @@ add-energy-prey
 add-energy-prey
 0
 20
-12.0
+20.0
 1
 1
 NIL
@@ -464,7 +464,7 @@ add-energy-predator
 add-energy-predator
 0
 20
-12.0
+20.0
 1
 1
 NIL
