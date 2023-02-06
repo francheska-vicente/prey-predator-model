@@ -117,7 +117,7 @@ to go
   if not any? coyotes and count cows > 100 [ user-message "The cows have won!" stop ]
 
   ask cows [
-    move
+    move-cows
 
     eat-grass
 
@@ -128,7 +128,7 @@ to go
   ]
 
   ask coyotes [
-    move
+    move-coyotes
 
     eat-cows
 
@@ -145,10 +145,35 @@ to go
   tick
 end
 
-to move ; this function moves agents one step forward in a random direction. it also subtracts the energy for the movement.
-  ifelse coin-flip? [right random 180] [left random 180]
-  forward 1
+to move-cows
+  ; this function moves cows one step forward in a random direction. it also subtracts the energy for the movement.
 
+  let green_patch one-of patches with [pcolor = green]
+
+  ifelse green_patch != nobody
+  [
+    move-to one-of patches with [pcolor = green]
+  ]
+  [
+    ifelse coin-flip? [right random 180] [left random 180]
+    forward 1
+  ]
+
+  set energy energy - 1
+end
+
+to move-coyotes
+  let near_cow one-of cows in-radius 2
+
+  ifelse near_cow != nobody and distance near_cow != 0
+  [
+    set heading (towards near_cow)
+  ]
+  [
+    ifelse coin-flip? [right random 180] [left random 180]
+  ]
+
+  forward 1
   set energy energy - 1
 end
 
@@ -206,7 +231,7 @@ to check-reproduce-cows ; this function determines if the cow will reproduce.
   if random 100 < fixed-cow-reproducing
   [
     set energy energy / 2
-    hatch-cows 1 [ move ]
+    hatch-cows 1 [ move-cows ]
   ]
 end
 
@@ -215,7 +240,7 @@ to check-reproduce-coyotes ; this function determines if the coyote will reprodu
   if random 100 < fixed-coyote-reproducing
   [
     set energy energy / 2
-    hatch-coyotes 1 [ move ]
+    hatch-coyotes 1 [ move-coyotes ]
   ]
 end
 
