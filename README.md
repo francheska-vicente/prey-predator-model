@@ -7,19 +7,23 @@ In this model, there are two main agents: (1) the cow, and (2) the coyote. The c
 The grass are the patches of green that can be seen in the model. If they are eaten, then they turn into the color black, and they can only be regrown after some fixed time.
 
 ### Prey: Cow
-Initially, cows are together in a herd of at least two cows around it. The cow wanders around the environment trying to find its food—the grass patches. As they move around, they lose energy, and they can only gain energy through eating. Once they run out of energy, then they will die. Additionally, there is a possibility that they can reproduce, which will increase the population of the cows. However, it is important to take note that they will also lose energy when they reproduce.
+Initially, cows are together in a herd of at least two cows around it. The cow wanders around the environment trying to find its food—the grass patches. As they move around, they lose energy, and they can only gain energy through eating. As cows want to eat, they try to move towards a patch that has grass on it. Although, the cow only tries to eat a patch of grass if it is no longer full.
+
+Once they run out of energy, then they will die. Additionally, there is a possibility that they can reproduce, which will increase the population of the cows. However, it is important to take note that they will also lose energy when they reproduce.
 
 ### Predator: Coyote
 At setup, coyotes are together in a group of at least two to four coyotes. This represents the fact that coyotes hunt in a pack, and not by itself.
 
-The coyote also moves around the environment. Although, they are moving around to search for the cows, which are their food. Just like their preys, they lose energy as they move around, which can be regained once they eat. They can also reproduce based on a fixed probability, and they lose half of their energy when they reproduce. 
+The coyote also moves around the environment. Although, they are moving around to search for the cows, which are their food. They also move towards cows are near their vicinity. However, they only eat when they are no longer full.
+
+Just like their preys, they lose energy as they move around, which can be regained once they eat. They can also reproduce based on a fixed probability, and they lose half of their energy when they reproduce. 
 
 ## Adjustable Parameters
 To fully understand how each of the components affect the system as a whole, the model has six (6) configurable parameters:
 1. `num-preys` → the initial number of cows in the model
 2. `num-predators` → the initial number of coyotes in the model
 3. `food-growth-time` → dictates the time (in seconds) it takes for an eaten grass patch to grow 
-4. `fixed-energy` → the initial energy all cows and coyotes have in the model
+4. `fixed-energy` → the initial energy all cows and coyotes have in the model; also the basis if the cow or coyote is no longer full 
 5. `fixed-coyote-reproducing` → the probability that a coyote will reproduce
 6. `fixed-cow-reproducing` → the probability that a cow will reproduce
 
