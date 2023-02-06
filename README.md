@@ -1,4 +1,5 @@
 # The Cow-Coyote Relationship: A Prey-Predator Ecosystem
+In the wilderness, wild animals thrive by preying on animals placed lower than them in the food chain. Coyotes are interesting mammals with their keen, clever, and smart tactics as predators. In the US, they are considered to be one of the largest threats to the survival of livestock such as sheep, lamb, and cows [(Derksen, 2021)](https://www.agproud.com/articles/52864-influencing-livestock-losses-from-coyote-predation). In this cellular automata-based model, a prey-predator relationship will be explored through a simulation of a prairie environment littered with herds of cows and coyotes to observe their behavior and relationshjip with one another.
 
 ## Behavior of the Agents
 In this model, there are two main agents: (1) the cow, and (2) the coyote. The coyotes are the a predator that tries to eat the cows, while cows are the preys that eats grass. 
