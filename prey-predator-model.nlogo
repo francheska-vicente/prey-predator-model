@@ -189,14 +189,18 @@ end
 to eat-cows ; this function determines if there is a cow near the coyote.
             ; it also lets a random cow near the coyote die and adds energy to the coyote.
             ; it also updates the global counter of the cows that die due to being eaten by a coyote.
-  let mortal-peril one-of cows in-radius 0.2
-
-  if mortal-peril != nobody
+  if energy < fixed-energy
   [
-    ask mortal-peril [ die ]
-    set energy energy + add-energy-predator
-    set cows-eaten cows-eaten + 1
+    let mortal-peril one-of cows in-radius 0.2
+
+    if mortal-peril != nobody
+    [
+      ask mortal-peril [ die ]
+      set energy energy + add-energy-predator
+      set cows-eaten cows-eaten + 1
+    ]
   ]
+
 end
 
 to regrowth ; this function determines if it is already time for a grass patch that was eaten to be regrown.
@@ -363,7 +367,7 @@ fixed-energy
 fixed-energy
 0
 1000
-75.0
+44.0
 1
 1
 NIL
@@ -378,7 +382,7 @@ fixed-coyote-reproducing
 fixed-coyote-reproducing
 0
 100
-77.0
+23.0
 1
 1
 NIL
@@ -426,7 +430,7 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-67.0
+25.0
 1
 1
 NIL
