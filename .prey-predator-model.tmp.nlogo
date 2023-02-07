@@ -402,10 +402,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-721
-101
-889
-146
+755
+83
+923
+128
 Number of Cows
 count cows
 17
@@ -413,10 +413,10 @@ count cows
 11
 
 MONITOR
-721
-152
-890
-197
+755
+134
+924
+179
 Number of Coyotes
 count coyotes
 17
@@ -424,10 +424,10 @@ count coyotes
 11
 
 MONITOR
-722
-201
-890
-246
+756
+183
+924
+228
 Number of Food (Grass)
 green-patches
 17
@@ -480,10 +480,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-722
-321
-887
-366
+756
+303
+921
+348
 Cows eaten by Coyote
 cows-eaten
 17
@@ -491,10 +491,10 @@ cows-eaten
 11
 
 MONITOR
-722
-372
-889
-417
+756
+354
+923
+399
 Cows dead due to no Energy
 cows-no-energy
 17
@@ -504,8 +504,8 @@ cows-no-energy
 PLOT
 921
 58
-1378
-458
+1471
+493
 total populations
 count
 time
@@ -522,10 +522,10 @@ PENS
 "grass" 1.0 0 -15040220 true "" "plot count patches with [pcolor = green]"
 
 MONITOR
-722
-427
-892
-472
+756
+409
+926
+454
 Coyotes that died
 dead-coyotes
 17
