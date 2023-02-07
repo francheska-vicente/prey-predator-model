@@ -110,7 +110,7 @@ to update-coyotes ; this function updates the information of the coyotes
 end
 
 to go
-  if ticks = 100 [stop]
+  if ticks =  [stop]
   ; if there are no more coyotes and cows, then we should stop the model.
   if not any? coyotes and not any? cows [ stop ]
 
@@ -136,7 +136,7 @@ to go
     check-die-coyotes
     check-reproduce-coyotes
 
-    set label penergy
+    set label precision energy 3
   ]
 
   ask patches [
@@ -180,7 +180,7 @@ end
 
 to eat-grass ; this function determines if there is grass in the patch where the cow is on.
              ; it also "eats" the grass and adds energy to the cow.
-  if energy < fixed-energy / 2
+  if energy + add-energy-prey < fixed-energy
   [
     if pcolor = green
     [
@@ -193,7 +193,7 @@ end
 to eat-cows ; this function determines if there is a cow near the coyote.
             ; it also lets a random cow near the coyote die and adds energy to the coyote.
             ; it also updates the global counter of the cows that die due to being eaten by a coyote.
-  if energy < fixed-energy / 2
+  if energy + add-energy-predator < fixed-energy
   [
     let mortal-peril one-of cows in-radius 0.2
 
@@ -248,7 +248,7 @@ to check-reproduce-coyotes ; this function determines if the coyote will reprodu
   if random 100 < fixed-coyote-reproducing
   [
     set energy energy / 2
-    hatch-coyotes 1 [ move-coyotes ]
+    hatch-coyotes (2 + random 4)[ move-coyotes ]
   ]
 end
 
@@ -371,7 +371,7 @@ fixed-energy
 fixed-energy
 0
 1000
-200.0
+120.0
 1
 1
 NIL
@@ -386,7 +386,7 @@ fixed-coyote-reproducing
 fixed-coyote-reproducing
 0
 100
-3.0
+1.0
 1
 1
 NIL
@@ -434,7 +434,7 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-12.0
+75.0
 1
 1
 NIL
@@ -449,7 +449,7 @@ add-energy-prey
 add-energy-prey
 0
 20
-20.0
+10.0
 1
 1
 NIL
@@ -464,7 +464,7 @@ add-energy-predator
 add-energy-predator
 0
 20
-20.0
+10.0
 1
 1
 NIL
