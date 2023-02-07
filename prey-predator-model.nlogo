@@ -316,7 +316,7 @@ BUTTON
 128
 go
 go
-NIL
+T
 1
 T
 OBSERVER
@@ -502,24 +502,24 @@ cows-no-energy
 11
 
 PLOT
-976
-125
-1176
-275
-plot 1
-NIL
-NIL
+921
+58
+1121
+208
+total populations
+count
+time
 0.0
 10.0
 0.0
 10.0
 true
-false
+true
 "" ""
 PENS
 "cows" 1.0 0 -16777216 true "" "plot count cows"
-"pen-1" 1.0 0 -10402772 true "" "plot count coyotes"
-"pen-2" 1.0 0 -15040220 true "" "plot count patches with [pcolor = green]"
+"coyotes" 1.0 0 -10402772 true "" "plot count coyotes"
+"grass" 1.0 0 -15040220 true "" "plot count patches with [pcolor = green]"
 
 MONITOR
 722
