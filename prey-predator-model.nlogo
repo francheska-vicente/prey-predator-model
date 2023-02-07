@@ -14,6 +14,8 @@ turtles-own [
 globals [
   cows-eaten      ; counts the number of cows that died due to being eaten by the coyotes
   cows-no-energy  ; counts the number of cows that died due to the loss of energy
+  green-patches
+  dead-coyotes
 ]
 
 to setup
@@ -47,6 +49,8 @@ to setup
 
   set cows-eaten 0
   set cows-no-energy 0
+  set dead-coyotes 0
+  set green-patches count patches with [pcolor = green]
 
   ; the lines of code under this are used to group the agents together.
   ; coyotes hunt in groups of at least two, while cows are herded together in groups of at least five
@@ -112,7 +116,7 @@ end
 to go
   if ticks = 100 [stop]
   ; if there are no more coyotes and cows, then we should stop the model.
-  if not any? coyotes and not any? cows [ stop ]
+  ; if not any? coyotes or not any? cows or green-patches = 0 [ stop ]
 
   ; if there are no more coyotes and at least a certain number of cows, then we should stop the model.
   if not any? coyotes and count cows > 100 [ user-message "The cows have won!" stop ]
@@ -186,6 +190,7 @@ to eat-grass ; this function determines if there is grass in the patch where the
     [
       set pcolor black
       set energy energy + add-energy-prey
+      set green-patches green-patches - 1
     ]
   ]
 end
@@ -214,6 +219,7 @@ to regrowth ; this function determines if it is already time for a grass patch t
     [
       set pcolor green
       set regrowth-time food-regrowth-time
+      set green-patches green-patches + 1
     ]
     [
       set regrowth-time regrowth-time - 1
@@ -223,7 +229,10 @@ end
 
 
 to check-die-coyotes ; this function determines if the coyote will die at that time step due to no energy.
-  if energy < 0 [ die ]
+  if energy < 0 [
+    set dead-coyotes dead-coyotes + 1
+    die
+  ]
 end
 
 to check-die-cows ; this function determines if the cow will die at that time step due to no energy.
@@ -341,7 +350,7 @@ num-predators
 num-predators
 0
 100
-100.0
+50.0
 1
 1
 NIL
@@ -511,6 +520,17 @@ PENS
 "cows" 1.0 0 -16777216 true "" "plot count cows"
 "pen-1" 1.0 0 -10402772 true "" "plot count coyotes"
 "pen-2" 1.0 0 -15040220 true "" "plot count patches with [pcolor = green]"
+
+MONITOR
+722
+427
+892
+472
+Coyotes that died
+dead-coyotes
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
