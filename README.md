@@ -1,5 +1,5 @@
 # The Cow-Coyote Relationship: A Prey-Predator Ecosystem
-In the wilderness, wild animals thrive by preying on animals placed lower than them in the food chain. Coyotes are interesting mammals with their keen, clever, and smart tactics as predators. In the US, they are considered to be one of the largest threats to the survival of livestock such as sheep, lamb, and cows [(Derksen, 2021)](https://www.agproud.com/articles/52864-influencing-livestock-losses-from-coyote-predation). In this cellular automata-based model, a prey-predator relationship will be explored through a simulation of a prairie environment littered with herds of cows and coyotes to observe their behavior and relationshjip with one another.
+In the wilderness, wild animals thrive by preying on animals placed lower than them in the food chain. Coyotes are interesting mammals with their keen, clever, and smart tactics as predators. In the US, they are considered to be one of the largest threats to the survival of livestock such as sheep, lamb, and cows [(Derksen, 2021)](https://www.agproud.com/articles/52864-influencing-livestock-losses-from-coyote-predation). In this cellular automata-based model, a prey-predator relationship will be explored through a simulation of a prairie environment littered with herds of cows and coyotes to observe their behavior and relationship with one another.
 
 ## Behavior of the Agents
 In this model, there are two main agents: (1) the cow, and (2) the coyote. The coyotes are the a predator that tries to eat the cows, while cows are the preys that eats grass. 
@@ -16,7 +16,7 @@ At setup, coyotes are together in a group of at least two to four coyotes. This 
 
 The coyote also moves around the environment. Although, they are moving around to search for the cows, which are their food. They also move towards cows are near their vicinity. However, they only eat when they are no longer full.
 
-Just like their preys, they lose energy as they move around, which can be regained once they eat. They can also reproduce based on a fixed probability, and they lose half of their energy when they reproduce. 
+Just like their preys, they lose energy as they move around, which can be regained once they eat. They can also reproduce based on a fixed probability, and they lose half of their energy when they reproduce. Coyotes only breed once a year and their litter is usually only composed of 2-6 pups ([Carr, 2017](https://fernandinaobserver.com/general/coyote-facts-you-should-know-1-1-more-pups/)). A random number from this range is used in the reproduction rate of the coyotes in the simulations.
 
 ## Adjustable Parameters
 To fully understand how each of the components affect the system as a whole, the model has six (6) configurable parameters:
@@ -26,6 +26,8 @@ To fully understand how each of the components affect the system as a whole, the
 4. `fixed-energy` → the initial energy all cows and coyotes have in the model; also the basis if the cow or coyote is no longer full 
 5. `fixed-coyote-reproducing` → the probability that a coyote will reproduce
 6. `fixed-cow-reproducing` → the probability that a cow will reproduce
+
+The reproduction rate of cows are higher compared to coyotes with cattle having a 60-70% rate while coyotes only breed once every year ([Diskin, 2016](https://doi.org/10.1016/j.theriogenology.2016.04.052); [Tokar, 2001](https://animaldiversity.org/accounts/Canis_latrans/)). The values represented in the repdoction probability are based off of these studies made on coyotes and cattle.
 
 ## Things to Observe
 In the model, there are some things that we can observe:
@@ -38,6 +40,13 @@ In the model, there are some things that we can observe:
 ## How to run the model locally
 1. Extract the folder from the zipped file that you can download through this DownGit [link](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/francheska-vicente/prey-predator-model).
 2. Once you open the folder, you can double-click the `prey-predator-model.nlogo` file to launch the model on NetLogo.
+
+## References
+Diskin, Michael & Kenny, David. (2016). *Managing the reproductive performance of beef cows*. Theriogenology. 86. 10.1016/j.theriogenology.2016.04.052.
+
+Tokar, E. 2001. *"Canis latrans" (On-line)*, Animal Diversity Web. Accessed February 07, 2023 at https://animaldiversity.org/accounts/Canis_latrans/
+
+Carr, J. (2017, December 10). *Coyote facts you should know: 1 – 1 = “More pups!* Fernandina Observer. https://fernandinaobserver.com/general/coyote-facts-you-should-know-1-1-more-pups/
 
 ## Members
 - **Sophia Louisse L. Eguaras** <br/>
