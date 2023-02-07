@@ -129,7 +129,7 @@ to go
     check-die-cows
     check-reproduce-cows
 
-    set label energy
+    set label precision energy 3
   ]
 
   ask coyotes [
@@ -316,7 +316,7 @@ BUTTON
 128
 go
 go
-T
+NIL
 1
 T
 OBSERVER
@@ -350,7 +350,7 @@ num-predators
 num-predators
 0
 100
-50.0
+100.0
 1
 1
 NIL
@@ -429,7 +429,7 @@ MONITOR
 890
 246
 Number of Food (Grass)
-count patches with [pcolor = green]
+green-patches
 17
 1
 11
