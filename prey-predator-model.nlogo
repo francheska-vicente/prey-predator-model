@@ -504,8 +504,8 @@ cows-no-energy
 PLOT
 921
 58
-1121
-208
+1471
+493
 total populations
 count
 time

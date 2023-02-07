@@ -114,9 +114,9 @@ to update-coyotes ; this function updates the information of the coyotes
 end
 
 to go
-  if ticks = 100 [stop]
+  ; if ticks = 100 [stop]
   ; if there are no more coyotes and cows, then we should stop the model.
-  ; if not any? coyotes or not any? cows or green-patches = 0 [ stop ]
+  if not any? coyotes or not any? cows or green-patches = 0 [ stop ]
 
   ; if there are no more coyotes and at least a certain number of cows, then we should stop the model.
   if not any? coyotes and count cows > 100 [ user-message "The cows have won!" stop ]
@@ -316,7 +316,7 @@ BUTTON
 128
 go
 go
-NIL
+T
 1
 T
 OBSERVER
@@ -350,7 +350,7 @@ num-predators
 num-predators
 0
 100
-100.0
+50.0
 1
 1
 NIL
@@ -502,24 +502,24 @@ cows-no-energy
 11
 
 PLOT
-976
-125
-1176
-275
-plot 1
-NIL
-NIL
+921
+58
+1378
+458
+total populations
+count
+time
 0.0
 10.0
 0.0
 10.0
 true
-false
+true
 "" ""
 PENS
 "cows" 1.0 0 -16777216 true "" "plot count cows"
-"pen-1" 1.0 0 -10402772 true "" "plot count coyotes"
-"pen-2" 1.0 0 -15040220 true "" "plot count patches with [pcolor = green]"
+"coyotes" 1.0 0 -10402772 true "" "plot count coyotes"
+"grass" 1.0 0 -15040220 true "" "plot count patches with [pcolor = green]"
 
 MONITOR
 722
