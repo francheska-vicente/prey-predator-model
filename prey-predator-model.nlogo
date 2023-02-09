@@ -151,7 +151,8 @@ to go
 end
 
 to move-cows
-  ; this function moves cows one step forward in a random direction. it also subtracts the energy for the movement.
+  ; this function moves cows one step forward in a random direction or moves it to a grass patch that is around it.
+  ; it also subtracts the energy for the movement.
 
   let green_patch one-of patches with [pcolor = green]
 
@@ -168,6 +169,9 @@ to move-cows
 end
 
 to move-coyotes
+  ; this function moves coyotes one step forward in a random direction or moves it towards a cow around it.
+  ; it also subtracts the energy for the movement
+
   let near_cow one-of cows in-radius 2
 
   ifelse near_cow != nobody and distance near_cow != 0
@@ -350,7 +354,7 @@ num-predators
 num-predators
 0
 100
-50.0
+100.0
 1
 1
 NIL
@@ -365,7 +369,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-3.0
+1.0
 1
 1
 NIL
