@@ -1,5 +1,6 @@
+<p align="center">
 <img src="https://user-images.githubusercontent.com/75743382/217928107-e64e637d-a365-4edc-b4db-1c6a6b941711.png" height="300px"> <img src="https://user-images.githubusercontent.com/75743382/217935054-85f7d82c-85a3-41b4-90fa-a25c247a9a50.png" height="300px">
-
+</p>
 
 # The Cow-Coyote Relationship: A Prey-Predator Ecosystem
 In the wilderness, many wild animals thrive by preying on animals who are weaker than them. An example of this is coyotes, which are fascinating omnivorous mammals with keen, clever, and intelligent tactics as predators. In the US, they are considered to be one of the most significant threats to the survival of livestock such as sheep, lamb, and cows [(Derksen, 2021)](https://www.agproud.com/articles/52864-influencing-livestock-losses-from-coyote-predation). 
