@@ -8,16 +8,16 @@ turtles-own [
   energy           ; the energy left of an agent
   happy?           ; for set-up; checks if the agent is happy (i.e., with its herd/group)
   similar-nearby   ; for set-up; checks the number of same type agent around it
-  age
+  age              ; the number of ticks an agent has been active
 ]
 
 ; the globals are used for the monitors
 globals [
   cows-eaten      ; counts the number of cows that died due to being eaten by the coyotes
   cows-no-energy  ; counts the number of cows that died due to the loss of energy
-  green-patches
-  dead-coyotes
-  maturity-age
+  green-patches   ; counts the number of grass patches
+  dead-coyotes    ; counts the number of coyotes that died
+  maturity-age    ; integer that determines if an agent is mature
 ]
 
 to setup
@@ -25,11 +25,13 @@ to setup
 
   reset-ticks
 
+  ; creates grass and randomizes the regrowth time of each patch
   ask n-of 1000 patches [
     set pcolor green
     set regrowth-time random food-regrowth-time
   ]
 
+  ; creates the initial number of cows
   create-cows num-preys [
     set shape "cow"
     set size 1.5
@@ -40,6 +42,7 @@ to setup
     set age 0
   ]
 
+  ; creates the initial number of cows
   create-coyotes num-predators [
     set shape "coyote"
     set size 1.5
@@ -289,7 +292,7 @@ GRAPHICS-WINDOW
 491
 -1
 -1
-13.0
+27.52
 1
 10
 1
@@ -333,7 +336,7 @@ BUTTON
 98
 go
 go
-T
+NIL
 1
 T
 OBSERVER
@@ -367,7 +370,7 @@ num-predators
 num-predators
 0
 100
-50.0
+5.0
 1
 1
 NIL
@@ -382,7 +385,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-9.0
+100.0
 1
 1
 NIL
@@ -460,7 +463,7 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-60.0
+62.0
 1
 1
 NIL
