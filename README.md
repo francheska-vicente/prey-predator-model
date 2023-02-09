@@ -32,7 +32,7 @@ At setup, coyotes are in packs of two to four coyotes to represent how coyotes u
   <img src="https://user-images.githubusercontent.com/75743382/217929049-e5d56cff-f932-438e-bab7-7fe6f9f3dc86.png">
 </p>
 
-Coyotes consume energy moving around the environment to hunt for cows, their food source. When a cow is nearby, they move towards it in preparation to pounce, eating it in the next time step. Like the cows, they will only eat when they are hungry and wander around randomly otherwise.
+Coyotes consume energy moving around the environment to hunt for cows, their food source. When a cow is nearby, they move towards it in preparation to pounce, eating it in the next time step. When a coyote eats the cow, it will restore energy equal to half the energy of the eaten cow. Like the cows, they will only eat when they are hungry and wander around randomly otherwise.
 
 They can also reproduce based on a fixed probability, and they lose half of their energy when they reproduce. Coyotes only breed once a year, and their litter is usually only composed of 2-6 pups ([Carr, 2017](https://fernandinaobserver.com/general/coyote-facts-you-should-know-1-1-more-pups/)). A random number from this range is used in the reproduction rate of the coyotes in the simulations.
 
