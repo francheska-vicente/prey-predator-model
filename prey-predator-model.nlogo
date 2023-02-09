@@ -205,7 +205,7 @@ to eat-grass ; this function determines if there is grass in the patch where the
 end
 
 to eat-cows ; this function determines if there is a cow near the coyote.
-            ; it also lets a random cow near the coyote die and adds energy to the coyote.
+            ; it also lets a random cow near the coyote die and adds energy to the coyote based on the cow's energy.
             ; it also updates the global counter of the cows that die due to being eaten by a coyote.
   let mortal-peril one-of cows in-radius 0.2
 
@@ -267,6 +267,7 @@ to check-die-cows ; this function determines if the cow will die at that time st
 end
 
 to check-reproduce-cows ; this function determines if the cow will reproduce.
+                        ; a cow will only reproduce if it has enough energy.
                         ; if the cow will reproduce, its energy will be divided into half.
   if random 100 <= fixed-cow-reproducing and energy >= energy-when-to-reproduce
   [
@@ -276,7 +277,8 @@ to check-reproduce-cows ; this function determines if the cow will reproduce.
 end
 
 to check-reproduce-coyotes ; this function determines if the coyote will reproduce.
-                          ; if the coyote will reproduce, its energy will be divided into half.
+                           ; a coyote will only reproduce if it has enough energy.
+                           ; if the coyote will reproduce, its energy will be divided into half.
   if random 100 <= fixed-coyote-reproducing and energy >= energy-when-to-reproduce
   [
     set energy energy / 2
