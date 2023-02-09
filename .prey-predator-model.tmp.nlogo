@@ -8,7 +8,7 @@ turtles-own [
   energy           ; the energy left of an agent
   happy?           ; for set-up; checks if the agent is happy (i.e., with its herd/group)
   similar-nearby   ; for set-up; checks the number of same type agent around it
-
+  age
 ]
 
 ; the globals are used for the monitors
@@ -17,6 +17,7 @@ globals [
   cows-no-energy  ; counts the number of cows that died due to the loss of energy
   green-patches
   dead-coyotes
+  maturity-age
 ]
 
 to setup
@@ -36,6 +37,7 @@ to setup
     setxy random-xcor random-ycor
 
     set energy fixed-energy
+    set age 0
   ]
 
   create-coyotes num-predators [
@@ -46,12 +48,14 @@ to setup
     setxy random-xcor random-ycor
 
     set energy fixed-energy
+    set age 0
   ]
 
   set cows-eaten 0
   set cows-no-energy 0
   set dead-coyotes 0
   set green-patches count patches with [pcolor = green]
+  set maturity-age 10
 
   ; the lines of code under this are used to group the agents together.
   ; coyotes hunt in groups of at least two, while cows are herded together in groups of at least five
@@ -177,7 +181,7 @@ to move-coyotes
 
   ifelse near_cow != nobody and distance near_cow != 0
   [
-    set heading (towards near_cow)
+    move-to near_cow
   ]
   [
     ifelse coin-flip? [right random 180] [left random 180]
@@ -209,8 +213,9 @@ to eat-cows ; this function determines if there is a cow near the coyote.
 
     if mortal-peril != nobody
     [
+      let energy2 [energy ] of mortal-peril
+      set energy energy + energy2
       ask mortal-peril [ die ]
-      set energy energy + add-energy-predator
       set cows-eaten cows-eaten + 1
     ]
   ]
@@ -234,23 +239,29 @@ end
 
 
 to check-die-coyotes ; this function determines if the coyote will die at that time step due to no energy.
-  if energy < 0 [
+  ifelse energy < 0 [
     set dead-coyotes dead-coyotes + 1
     die
+  ]
+  [
+    set age age + 1
   ]
 end
 
 to check-die-cows ; this function determines if the cow will die at that time step due to no energy.
                   ; it also updates the global counter for the cows that die due to no energy.
-  if energy < 0 [
+  ifelse energy < 0 [
     set cows-no-energy cows-no-energy + 1
     die
+  ]
+  [
+    set age age + 1
   ]
 end
 
 to check-reproduce-cows ; this function determines if the cow will reproduce.
                         ; if the cow will reproduce, its energy will be divided into half.
-  if random 100 <= fixed-cow-reproducing
+  if random 100 <= fixed-cow-reproducing and age >= maturity-age
   [
     set energy energy / 2
     hatch-cows 1 [ move-cows ]
@@ -259,7 +270,7 @@ end
 
 to check-reproduce-coyotes ; this function determines if the coyote will reproduce.
                           ; if the coyote will reproduce, its energy will be divided into half.
-  if random 100 <= fixed-coyote-reproducing
+  if random 100 <= fixed-coyote-reproducing and age >= maturity-age
   [
     set energy energy / 2
     hatch-coyotes (2 + random 4)[ move-coyotes ]
@@ -340,7 +351,7 @@ num-preys
 num-preys
 0
 100
-20.0
+50.0
 1
 1
 NIL
@@ -355,7 +366,7 @@ num-predators
 num-predators
 0
 100
-20.0
+50.0
 1
 1
 NIL
@@ -370,7 +381,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-5.0
+3.0
 1
 1
 NIL
@@ -385,7 +396,7 @@ fixed-energy
 fixed-energy
 0
 1000
-120.0
+110.0
 1
 1
 NIL
@@ -448,7 +459,7 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-60.0
+30.0
 1
 1
 NIL
@@ -463,7 +474,7 @@ add-energy-prey
 add-energy-prey
 0
 20
-10.0
+5.0
 1
 1
 NIL
