@@ -25,9 +25,9 @@ to setup
 
   reset-ticks
 
-  ask patches [
+  ask n-of 1000 patches [
     set pcolor green
-    set regrowth-time food-regrowth-time
+    set regrowth-time random food-regrowth-time
   ]
 
   create-cows num-preys [
@@ -36,7 +36,7 @@ to setup
     set color white
     setxy random-xcor random-ycor
 
-    set energy fixed-energy
+    set energy random fixed-energy
     set age 0
   ]
 
@@ -47,7 +47,7 @@ to setup
 
     setxy random-xcor random-ycor
 
-    set energy fixed-energy
+    set energy random fixed-energy
     set age 0
   ]
 
@@ -55,7 +55,7 @@ to setup
   set cows-no-energy 0
   set dead-coyotes 0
   set green-patches count patches with [pcolor = green]
-  set maturity-age 10
+  set maturity-age 5
 
   ; the lines of code under this are used to group the agents together.
   ; coyotes hunt in groups of at least two, while cows are herded together in groups of at least five
@@ -198,7 +198,7 @@ to eat-grass ; this function determines if there is grass in the patch where the
     if pcolor = green
     [
       set pcolor black
-      set energy energy + add-energy-prey
+      set energy energy + random add-energy-prey
       set green-patches green-patches - 1
     ]
   ]
@@ -207,13 +207,14 @@ end
 to eat-cows ; this function determines if there is a cow near the coyote.
             ; it also lets a random cow near the coyote die and adds energy to the coyote.
             ; it also updates the global counter of the cows that die due to being eaten by a coyote.
-  if energy + add-energy-predator < fixed-energy
-  [
-    let mortal-peril one-of cows in-radius 0.2
+  let mortal-peril one-of cows in-radius 0.2
 
-    if mortal-peril != nobody
+  if mortal-peril != nobody
+  [
+    let energy2 [energy / 2] of mortal-peril
+
+    if energy + energy2 < fixed-energy
     [
-      let energy2 [energy / 2] of mortal-peril
       set energy energy + energy2
       ask mortal-peril [ die ]
       set cows-eaten cows-eaten + 1
@@ -261,7 +262,7 @@ end
 
 to check-reproduce-cows ; this function determines if the cow will reproduce.
                         ; if the cow will reproduce, its energy will be divided into half.
-  if random 100 <= fixed-cow-reproducing and age >= maturity-age
+  if random 100 <= fixed-cow-reproducing and energy >= energy-when-to-reproduce
   [
     set energy energy / 2
     hatch-cows 1 [ move-cows ]
@@ -270,7 +271,7 @@ end
 
 to check-reproduce-coyotes ; this function determines if the coyote will reproduce.
                           ; if the coyote will reproduce, its energy will be divided into half.
-  if random 100 <= fixed-coyote-reproducing and age >= maturity-age
+  if random 100 <= fixed-coyote-reproducing and energy >= energy-when-to-reproduce
   [
     set energy energy / 2
     hatch-coyotes (2 + random 4)[ move-coyotes ]
@@ -309,10 +310,10 @@ ticks
 30.0
 
 BUTTON
-90
-55
-153
-88
+84
+25
+147
+58
 setup
 setup
 NIL
@@ -326,10 +327,10 @@ NIL
 1
 
 BUTTON
-90
-95
-153
-128
+84
+65
+147
+98
 go
 go
 T
@@ -351,7 +352,7 @@ num-preys
 num-preys
 0
 100
-100.0
+50.0
 1
 1
 NIL
@@ -366,7 +367,7 @@ num-predators
 num-predators
 0
 100
-100.0
+50.0
 1
 1
 NIL
@@ -381,7 +382,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-3.0
+9.0
 1
 1
 NIL
@@ -459,7 +460,7 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-30.0
+60.0
 1
 1
 NIL
@@ -474,22 +475,7 @@ add-energy-prey
 add-energy-prey
 0
 20
-5.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-30
-474
-210
-507
-add-energy-predator
-add-energy-predator
-0
-20
-10.0
+9.0
 1
 1
 NIL
@@ -547,6 +533,36 @@ dead-coyotes
 17
 1
 11
+
+SLIDER
+33
+479
+214
+512
+energy-when-to-reproduce
+energy-when-to-reproduce
+0
+500
+100.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+35
+123
+207
+156
+num-grass
+num-grass
+0
+1089
+300.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
