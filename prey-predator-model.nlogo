@@ -8,7 +8,6 @@ turtles-own [
   energy           ; the energy left of an agent
   happy?           ; for set-up; checks if the agent is happy (i.e., with its herd/group)
   similar-nearby   ; for set-up; checks the number of same type agent around it
-  age
 ]
 
 ; the globals are used for the monitors
@@ -155,11 +154,11 @@ to move-cows
   ; this function moves cows one step forward in a random direction or moves it to a grass patch that is around it.
   ; it also subtracts the energy for the movement.
 
-  let green_patch one-of patches in-radius 2
+  let green_patch one-of patches with [pcolor = green]
 
   ifelse green_patch != nobody
   [
-    move-to green_patch
+    move-to one-of patches with [pcolor = green]
   ]
   [
     ifelse coin-flip? [right random 180] [left random 180]
@@ -250,7 +249,7 @@ end
 
 to check-reproduce-cows ; this function determines if the cow will reproduce.
                         ; if the cow will reproduce, its energy will be divided into half.
-  if random 100 <= fixed-cow-reproducing
+  if random 100 < fixed-cow-reproducing
   [
     set energy energy / 2
     hatch-cows 1 [ move-cows ]
@@ -259,7 +258,7 @@ end
 
 to check-reproduce-coyotes ; this function determines if the coyote will reproduce.
                           ; if the coyote will reproduce, its energy will be divided into half.
-  if random 100 <= fixed-coyote-reproducing
+  if random 100 < fixed-coyote-reproducing
   [
     set energy energy / 2
     hatch-coyotes (2 + random 4)[ move-coyotes ]
@@ -340,7 +339,7 @@ num-preys
 num-preys
 0
 100
-20.0
+100.0
 1
 1
 NIL
@@ -355,7 +354,7 @@ num-predators
 num-predators
 0
 100
-20.0
+100.0
 1
 1
 NIL
@@ -370,7 +369,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-5.0
+1.0
 1
 1
 NIL
@@ -448,7 +447,7 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-60.0
+70.0
 1
 1
 NIL
