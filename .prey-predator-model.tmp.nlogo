@@ -8,16 +8,16 @@ turtles-own [
   energy           ; the energy left of an agent
   happy?           ; for set-up; checks if the agent is happy (i.e., with its herd/group)
   similar-nearby   ; for set-up; checks the number of same type agent around it
-  age
+  age              ; the number of ticks an agent has been active
 ]
 
 ; the globals are used for the monitors
 globals [
   cows-eaten      ; counts the number of cows that died due to being eaten by the coyotes
   cows-no-energy  ; counts the number of cows that died due to the loss of energy
-  green-patches
-  dead-coyotes
-  maturity-age
+  green-patches   ; counts the number of grass patches
+  dead-coyotes    ; counts the number of coyotes that died
+  maturity-age    ; integer that determines if an agent is mature
 ]
 
 to setup
@@ -25,11 +25,13 @@ to setup
 
   reset-ticks
 
+  ; creates grass and randomizes the regrowth time of each patch
   ask n-of 1000 patches [
     set pcolor green
     set regrowth-time random food-regrowth-time
   ]
 
+  ; creates the initial number of cows
   create-cows num-preys [
     set shape "cow"
     set size 1.5
@@ -40,6 +42,7 @@ to setup
     set age 0
   ]
 
+  ; creates the initial number of cows
   create-coyotes num-predators [
     set shape "coyote"
     set size 1.5
@@ -119,12 +122,12 @@ to update-coyotes ; this function updates the information of the coyotes
 end
 
 to go
-  if ticks = 00 [stop]
+  if ticks = 500 [stop]
   ; if there are no more coyotes and cows, then we should stop the model.
   ; if not any? coyotes or not any? cows or green-patches = 0 [ stop ]
 
   ; if there are no more coyotes and at least a certain number of cows, then we should stop the model.
-  if not any? coyotes and count cows > 100 [ user-message "The cows have won!" stop ]
+
 
   ask cows [
     move-cows
@@ -228,9 +231,15 @@ to regrowth ; this function determines if it is already time for a grass patch t
   [
     ifelse regrowth-time <= 0
     [
-      set pcolor green
-      set regrowth-time food-regrowth-time
-      set green-patches green-patches + 1
+      ifelse ticks >= food-regrowth-time
+      [
+        set pcolor green
+        set regrowth-time food-regrowth-time
+        set green-patches green-patches + 1
+      ]
+      [
+        set regrowth-time 1
+      ]
     ]
     [
       set regrowth-time regrowth-time - 1
@@ -367,7 +376,7 @@ num-predators
 num-predators
 0
 100
-50.0
+100.0
 1
 1
 NIL
@@ -460,7 +469,7 @@ fixed-cow-reproducing
 fixed-cow-reproducing
 0
 100
-60.0
+62.0
 1
 1
 NIL

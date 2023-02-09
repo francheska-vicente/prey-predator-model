@@ -126,9 +126,6 @@ to go
   ; if there are no more coyotes and cows, then we should stop the model.
   ; if not any? coyotes or not any? cows or green-patches = 0 [ stop ]
 
-  ; if there are no more coyotes and at least a certain number of cows, then we should stop the model.
-  if not any? coyotes and count cows > 100 [ user-message "The cows have won!" stop ]
-
   ask cows [
     move-cows
 
@@ -231,9 +228,15 @@ to regrowth ; this function determines if it is already time for a grass patch t
   [
     ifelse regrowth-time <= 0
     [
-      set pcolor green
-      set regrowth-time food-regrowth-time
-      set green-patches green-patches + 1
+      ifelse ticks >= food-regrowth-time
+      [
+        set pcolor green
+        set regrowth-time food-regrowth-time
+        set green-patches green-patches + 1
+      ]
+      [
+        set regrowth-time 1
+      ]
     ]
     [
       set regrowth-time regrowth-time - 1
@@ -292,7 +295,7 @@ GRAPHICS-WINDOW
 491
 -1
 -1
-27.52
+13.0
 1
 10
 1
@@ -336,7 +339,7 @@ BUTTON
 98
 go
 go
-NIL
+T
 1
 T
 OBSERVER
@@ -370,7 +373,7 @@ num-predators
 num-predators
 0
 100
-5.0
+100.0
 1
 1
 NIL
@@ -385,7 +388,7 @@ food-regrowth-time
 food-regrowth-time
 0
 100
-100.0
+9.0
 1
 1
 NIL
