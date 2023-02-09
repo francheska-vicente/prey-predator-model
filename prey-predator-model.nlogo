@@ -119,9 +119,9 @@ to update-coyotes ; this function updates the information of the coyotes
 end
 
 to go
-  ; if ticks = 100 [stop]
+  if ticks = 500 [stop]
   ; if there are no more coyotes and cows, then we should stop the model.
-  if not any? coyotes or not any? cows or green-patches = 0 [ stop ]
+  ; if not any? coyotes or not any? cows or green-patches = 0 [ stop ]
 
   ; if there are no more coyotes and at least a certain number of cows, then we should stop the model.
   if not any? coyotes and count cows > 100 [ user-message "The cows have won!" stop ]
@@ -352,7 +352,7 @@ num-preys
 num-preys
 0
 100
-50.0
+100.0
 1
 1
 NIL
